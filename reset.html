@@ -1,0 +1,82 @@
+﻿<html>
+  <head>
+    <title>webparts-anniversary-countdown by toritan</title>
+    <!-- google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- script -->
+    <script type="text/javascript">
+      // #region init *******************************************************
+      // #endregion init
+
+      // #region method *****************************************************
+      // LS取得
+      const getLocalStorage = () => {
+        const settings = localStorage.getItem(
+          "webparts-anniversary-countdown-toritan-settings"
+        );
+        if (settings != null) {
+          $("div#settings").text(settings);
+        } else {
+          $("div#settings").text("設定がありません。");
+          $("button#reset").prop("disabled", true);
+        }
+      };
+
+      // LS削除
+      const removeLocalStorage = () => {
+        $("button#reset").prop("disabled", true);
+        localStorage.removeItem(
+          "webparts-anniversary-countdown-toritan-settings"
+        );
+        $("div#messages").text("設定を削除しました。リロードしてください。");
+      };
+      // #endregion methon
+
+      // #region ready ******************************************************
+      $().ready(function () {
+        getLocalStorage();
+      });
+      // #endregion ready
+    </script>
+    <style type="text/css">
+      /* #region css main ************************************************ */
+      html {
+        --background-color: 0, 255, 0;
+        --background-opacity: 1;
+        --text-color: 255, 255, 255;
+        --text-outline-color: 0, 0, 0;
+        --target-text-color: var(--text-outline-color);
+        --target-background-color: var(--text-color);
+      }
+      body {
+        font-family: "M PLUS 1", monospace;
+        font-optical-sizing: auto;
+        /* font-weight: 900; */
+        font-style: normal;
+        background-color: rgba(
+          var(--background-color),
+          var(--background-opacity)
+        );
+        user-select: none;
+        transform: scale(2);
+        transform-origin: left top;
+      }
+      /* #endregion css main */
+    </style>
+  </head>
+  <body>
+    <div>
+      <h4>設定内容</h4>
+      <div id="settings"></div>
+      <button id="reset" onclick="removeLocalStorage()">設定をリセット</button>
+      <div id="messages"></div>
+    </div>
+  </body>
+</html>
